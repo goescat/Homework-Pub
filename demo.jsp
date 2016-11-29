@@ -19,8 +19,8 @@
 <li><p><b>年齡：</b>
       <%= request.getParameter("year")%>
 </p></li>
-<li><p><b>：</b>
-      <%= request.getParameter("year")%>
+<li><p><b>密碼：</b>
+      //<%= request.getParameter("pwd")%>
 </p></li>
 </ul>
 </body>
