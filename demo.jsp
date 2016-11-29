@@ -10,14 +10,17 @@
 <body>
 <ul>
 <li><p><b>姓名:</b>
-   <%= request.getParameter("name")%>
+   <%= request.getParameter("usrInput")%>
 </p></li>
 <li><p><b>性別:</b>
-   <%= request.getParameter("sex")%>
+<% String sex = new String((request.getParameter("sex")).getBytes("ISO-8859-1"),"UTF-8");%>
+<%= sex %>
 </p></li>
 <li><p><b>年齡：</b>
       <%= request.getParameter("year")%>
 </p></li>
+<li><p><b>：</b>
+      <%= request.getParameter("year")%>
 </p></li>
 </ul>
 </body>
