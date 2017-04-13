@@ -1,0 +1,215 @@
+#### 作業題目 ####
+# (1)建立Nets之5位NBA球員的得分向量資料，計算個別5位NBA球員的總得分與平均得分
+# (2)計算Nets 5場比賽團隊的總進球數與總得分
+# (3)列出Nets每場比賽得分最多的球員
+# (4)計算Nets第3場比賽之中位數與標準差
+# 題目假設每場都進1顆3分球
+####
+
+#### 籃球計分方式 ####
+# 進球 2分
+# 罰球 1分
+# 三分球 3分
+# 進球+罰球是一場
+####
+
+#(1)建立Nets之5位NBA球員的得分向量資料，計算個別5位NBA球員的總得分與平均得分
+#### 5位NBA球員的得分向量資料 ####
+NBA2016.Lin <- c(6,3,5,0,4,0,4,2,6,4)
+NBA2016.Booker <- c(6,4,6,1,3,0,1,1,2,0)
+NBA2016.Lopez <- c(6,1,3,4,12,4,8,7,4,0)
+NBA2016.Bog <- c(4,0,4,2,4,1,4,8,7,0)
+NBA2016.Kil <- c(2,3,2,3,6,2,9,1,4,2)
+####
+
+#### 以csv匯入，已註解，下面才會實際使用 ####
+#NBA2016.All <- read.csv("~/R/NBA2016成績.csv", header= TRUE, sep = ",")
+####
+
+#### 計算進球數的function ####
+NBArcount <- function(x){
+  count <- 0
+  nonZero <-0
+  for(i in 1:10){
+    if(i %% 2 != 0){
+      count=count+x[i]
+    }
+  }
+  count
+}
+
+####
+
+#### 計算進球得分的function ####
+NBAcount <- function(x){
+  count <- 0 #用來儲存進球數的變數
+  nonZero <-0 #用來判斷進球非0球的變數
+  for(i in 1:10){ #因為有10筆資料，故迴圈10次
+    if(i %% 2 != 0){ #只取奇數場，取得分資料中的進球資料
+      count=count+x[i] #球數計算，x為傳入函式所帶的參數
+      if(x[i] != 0){ #如果這場的進球數不為0
+        nonZero=nonZero+1 #進球不為0的場數累計
+      }
+    }
+  }
+  count=(count*2)+nonZero
+  #每球2分，故乘2；
+  #只要一場的進球不為0便有一3分球，於是直接多加上非0場數
+  count
+}
+####
+
+#### 計算罰球得分的function ####
+NBApcount <- function(x){
+  count <- 0 #用來儲存球數的變數
+  for(i in 1:10){ #因為有10筆資料，故迴圈10次
+    if(i %% 2 == 0){ #只取偶數場，取得分資料中的罰球資料
+      count=count+x[i] #球數計算，x為傳入函式所帶的參數
+    }
+  }
+  count
+}
+####
+
+#### 題(1)，答 ####
+print("5位NBA球員的總得分與平均得分：")
+
+LinS = NBAcount(NBA2016.Lin) + NBApcount(NBA2016.Lin)
+#呼叫NBAcount（進球得分）、NBApcount（罰球得分）function，並相加
+paste("Lin 的總得分：",LinS)
+
+Linaver= LinS/5 #除以場數求平均得分
+paste("Lin 的平均得分：",Linaver)
+
+BookerS = NBAcount(NBA2016.Booker)+NBApcount(NBA2016.Booker)
+paste("Booker 的總得分：",BookerS)
+
+Bookeraver= BookerS/5
+paste("Booker 的平均得分：",Bookeraver)
+
+LopezS = NBAcount(NBA2016.Lopez)+NBApcount(NBA2016.Lopez)
+paste("Lopez 的總得分：",LopezS)
+
+Lopezaver=LopezS/5
+paste("Lopez 的平均得分：",Lopezaver)
+
+BogS = NBAcount(NBA2016.Bog)+NBApcount(NBA2016.Bog)
+paste("Bog 的總得分：",BogS)
+
+Bogaver=BogS/5
+paste("Bog 的平均得分：",Bogaver)
+
+KilS = NBAcount(NBA2016.Kil)+NBApcount(NBA2016.Kil)
+paste("Kil 的總得分：",KilS)
+
+Kilaver=KilS/5
+paste("Kil 的平均得分：",Kilaver)
+####
+
+#### 題(2)，答 ####
+print("5場比賽團隊的總進球數與總得分：")
+
+NBAallvar = NBArcount(NBA2016.Lin)+NBApcount(NBA2016.Lin)+
+  NBArcount(NBA2016.Booker)+NBApcount(NBA2016.Booker)+
+  NBArcount(NBA2016.Lopez)+NBApcount(NBA2016.Lopez)+
+  NBArcount(NBA2016.Bog)+NBApcount(NBA2016.Bog)+
+  NBArcount(NBA2016.Kil)+NBApcount(NBA2016.Kil)
+#呼叫 NBArcount（進球數）、NBApcount（罰球數）function，並相加
+
+paste("團隊總進球數：",NBAallvar) #字串串連印出
+
+NBAallSvar = LinS+BookerS+LopezS+BogS+KilS #將題(1)所有人之個人得分加總，得的團隊總得分
+paste("團隊總得分數：",NBAallSvar)
+####
+
+
+#### 題(3)，答 ####
+
+NBA2016.All <- read.csv("~/R/NBA2016成績.csv", header= TRUE, sep = ",") #以csv匯入得分資料
+
+scoring <- seq(2, 10, 2) #偶數數列，進球場
+pscoring <- seq(3, 11, 2) #奇數數列，罰球場
+
+#### 計算每人每場的進球得分 ####
+NBA2016.Alls <- NBA2016.All #複製資料表，以儲存進球得分
+
+for(i in 1:5){
+  for(j in scoring){ #只取進球的資料
+    if(NBA2016.All[i,j] > 0){ #如果每次進球數大於0
+      NBA2016.Alls[i,j] = (NBA2016.All[i,j]*2)+1 #該場得分乘以2並加上一3分球的1分
+    }
+  }
+}
+
+####
+
+#### 每人每場之總得分 ####
+NBAscro <- matrix(c(0), nrow=5, ncol=10) #建立一5欄10列的陣列
+
+for(i in 1:5){
+  for(j in scoring){ #偶數數列，進球場資料
+    NBAscro[i,j] <- (NBA2016.Alls[i,j]+NBA2016.All[i,(j+1)]) #每場總得分為進球場加罰球場，存於陣列 NBAscro
+  }
+}
+####
+
+print("每場比賽得分最多的球員：")
+
+vcont <- 1 #用於輸出場次
+for(j in scoring){
+  tmp <- 0 #建立tmp變數，存最高分數
+  tmpn <-0 #建立tmpn變數，存最高分數之名稱
+  for(i in 1:5){
+    if(NBAscro[i,j] > tmp){ #如果NBAscro陣列中的值大於tmp的值
+      tmpn <- i #取得欄位數，以識別名稱
+      tmp <- NBAscro[i,j] #取得數值
+    }
+  }
+
+  # 將球員編號轉為球員名稱
+  if(tmpn == 1){
+    print(paste("第",vcont,"場得分最多的球員：Lin"))
+  }
+  if(tmpn == 2){
+    print(paste("第",vcont,"場得分最多的球員：Booker"))
+  }
+  if(tmpn == 3){
+    print(paste("第",vcont,"場得分最多的球員：Lopez"))
+  }
+  if(tmpn == 4){
+    print(paste("第",vcont,"場得分最多的球員：Bog"))
+  }
+  if(tmpn == 5){
+    print(paste("第",vcont,"場得分最多的球員：Kil"))
+  }
+
+  print(paste("得分：",tmp))
+  vcont <- vcont+1 #更新場次
+}
+
+#### 題(4)，答 ####
+
+#### 計算中位數 ####
+midcount <- sort(NBAscro[,6]) #將第3場得分排序
+
+print(paste("第3場比賽之中位數：",midcount[3])) #取出中間數，並輸出答案
+####
+
+#### 計算平均數 ####
+avercount <- 0
+for(i in 1:5){
+  avercount <- avercount+NBAscro[i,6] #將分數加總
+}
+avercount <- avercount/5 #將總得分數除以球員人數
+####
+
+#### 計算標準差 ####
+stancount <- 0
+for(i in 1:5){
+  stancount <- ((NBAscro[i,6]-avercount)*(NBAscro[i,6]-avercount))+stancount #將每人的得分減去平均數再平方，然後全部相加
+}
+stancount <- sqrt(stancount/5) #除以球員數，得標準差
+####
+
+print(paste("第3場比賽之標準差：",stancount)) #輸出答案
+####
