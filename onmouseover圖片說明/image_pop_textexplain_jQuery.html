@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Page Title</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">
+  </script>
+</head>
+
+<style>
+  #box {
+    border-radius: 3px;
+    background-color: #fff2ff;
+    padding: 6px 10px;
+    width: 150px;
+    position: absolute;
+    top: 40px;
+    left: 260px;
+    z-index: 1;
+  }
+</style>
+
+<body>
+  <div>
+    <img id="img" src="http://www.petmd.com/sites/default/files/what-does-it-mean-when-cat-wags-tail.jpg" height=200px; width=300px>
+  </div>
+  <div id="box" style="visibility: hidden">
+    this is a cat!!!
+    <br>cat<br>meowmeowOwO<br>test<img src="http://www.petmd.com/sites/default/files/what-does-it-mean-when-cat-wags-tail.jpg" height=50px; width=90px>
+  </div>
+
+
+</body>
+<script>
+  $("#img").hover(function() {
+      $("#box").css("visibility", "visible");
+    },
+    function() {
+      $("#box").css("visibility", "hidden");
+    });
+</script>
+
+</html>
