@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atc2 6-1-1 多頁面結構-home頁面</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  </body>
+  <div data-role="page">
+    <div data-role="header" id="home">
+      <h1>GitHub</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+      <p>GitHub是透過Git進行版本控制的軟體原始碼代管服務，由GitHub公司（曾稱Logical Awesome）的開發者Chris Wanstrath、PJ Hyett和Tom Preston-Werner使用Ruby on Rails編寫而成。 GitHub同時提供付費帳戶和免費帳戶。這兩種帳戶都可以建立公開的代碼倉庫，但是付費帳戶還可以建立私有的代碼倉庫。根據在2009年的Git用戶調查，GitHub是最流行的Git存取站點。除了允許個人和組織建立和存取保管中的代碼以外，它也提供了一些方便社會化共同軟體開發的功能，即一般人口中的社群功能，包括允許用戶追蹤其他用戶、組織、軟體庫的動態，對軟體代碼的改動和bug提出評論等。GitHub也提供了圖表功能，用於概觀顯示開發者們怎樣在代碼庫上工作以及軟體的開發活躍程度。
+        截止到2015年，GitHub已經有超過兩千八百萬註冊用戶和7900萬代碼庫。事實上已經成為了世界上最大的代碼存放網站和開源社群。
+      </p>
+      <p><a href="#about">內容來源</a></p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+      <!--data-position="fixed" 讓 footer bar 能固定於下方-->
+      <h1>製作者: A4404974</h1>
+    </div>
+  </div>
+  <!-- 用 data-title="" 改變到此頁面時瀏覽器上方顯示的 title -->
+  <div data-role="page" id="about" data-title="內容來源">
+  <div data-role="header">
+    <!-- 簡報方法：<div data-role="header" data-add-back-btn="true" data-back-btn-text="上一頁"> -->
+    <!--加入上一頁按鈕-->
+    <a href="#" data-icon="arrow-l" data-rel="back" data-transition="slide" data-direction="reverse">上一頁</a>
+      <h1>內容來源</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+      <p>Wikipedia</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+      <h1>製作者: A4404974</h1>
+    </div>
+  </div>
+  </body>
+
+</html>
