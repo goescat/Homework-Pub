@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>早餐計算機</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <link rel="stylesheet" href="themes/ob.css" />
+  <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  <script>
+    function countam() {
+      var swh_price = 360 * $('#swh_var').val();
+      var ym_price = 230 * $('#ym_var').val();
+      var shi_price = 50 * $('#shi_var').val();
+      var cow_price = 9550 * $('#cow_var').val();
+      var milk_price = 480 * $('#milk_var').val();
+
+      var amount = swh_price + ym_price + shi_price + cow_price + milk_price;
+
+      if ($('#discount').is(':checked')) {
+        amount = amount * 0.9;
+        amount = amount.toFixed(0);
+      }
+
+      $('#total').val(amount);
+    }
+  </script>
+
+</head>
+
+<body>
+  <div data-role="page">
+    <div data-role="header">
+      <h1>早餐計算機</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+      <ul data-role="listview">
+        <li>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <img src="http://grinews.com/news/wp-content/uploads/2016/08/%E9%A3%9F%E7%89%A9006.jpg" /height=80px>
+            </div>
+            <div class="ui-block-b">
+              澎湃好野任性三明治:360元
+              <input type="range" name="swh_var" id="swh_var" value="0" min="0" max="10" onchange="countam();" />
+            </div>
+        </li>
+
+        <li>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <img src="http://grinews.com/news/wp-content/uploads/2016/08/%E9%A3%9F%E7%89%A9008.jpg" /height=80px>
+            </div>
+            <div class="ui-block-b">
+              精緻養生減料沒偷工燕麥：230元
+              <input type="range" name="ym_var" id="ym_var" value="0" min="0" max="10" onchange="countam();" />
+            </div>
+        </li>
+
+        <li>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <img src="http://grinews.com/news/wp-content/uploads/2016/08/%E9%A3%9F%E7%89%A9002.jpg" /height=80px>
+            </div>
+            <div class="ui-block-b">
+              普通平凡窮學生吃的花卷壽司：50元
+              <input type="range" name="shi_var" id="shi_var" value="0" min="0" max="10" onchange="countam();" />
+            </div>
+        </li>
+
+        <li>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <img src="https://cdn0-mf-techbang.pixfs.net/system/images/15998/medium/c73303f3febb9d35603a85807667d45d.jpg" /height=80px>
+            </div>
+            <div class="ui-block-b">
+              我壕早餐就要壕5A牛排餐你平民吃不起：9550元
+              <input type="range" name="cow_var" id="cow_var" value="0" min="0" max="10" onchange="countam();" />
+            </div>
+        </li>
+
+        <li>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <img src="https://ibw.bwnet.com.tw/image/pool/2018/03/b3bc56be71969dc2d70294a18460c766.jpg" /height=80px>
+            </div>
+            <div class="ui-block-b">
+              長高配方神奇誆金擱包銀奶：480元
+              <input type="range" name="milk_var" id="milk_var" value="0" min="0" max="10" onchange="countam();" />
+            </div>
+        </li>
+      </ul>
+      </div>
+      <div class="ui-field-contain">
+        外帶打9折
+        <input type="checkbox" data-role="flipswitch" id="discount" onchange="countam();" />
+      </div>
+
+      <div class="ui-field-contain">
+        價格：
+        <input name="total" id="total" value="0" />
+      </div>
+      </div>
+</body>
+</html>
