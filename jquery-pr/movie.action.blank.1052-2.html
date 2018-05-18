@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+	</script>
+
+
+	<script>
+	$.getJSON('https://api.douban.com/v2/movie/top250?callback=?',
+
+		{
+			"start": 0,
+			"count": 20
+		},
+		function(data) {
+			fillData(data["subjects"]);
+		}
+
+	);
+		function fillData(mvArr) {
+			for (var i = 0; i < 20; i++) {
+				var mv = mvArr[i];
+				var img = $("<img>").attr("src", mv["images"]["medium"])
+				var sp = $("<span>").addClass("ui-li-count")
+					.text(mv["rating"]["average"]);
+				var a = $("<a>").attr("href", mv["alt"])
+
+					.append(img)
+					.append($("<h1>").text(mv["title"]))
+					.append($("<p>").text(mv["original_title"] + "-" + mv["year"]))
+
+				var l = $("<li>").append(a).append(sp);
+				$("#mvlist").append(l);
+			}
+			$("ol li a").css("padding-left", "60px");
+			$(".ui-li-count").css("right", "4em");
+			$("#mvlist").listview("refresh");
+		}
+
+		$(document).ready(function() {
+			fillData(mvArr);
+		});
+
+
+	</script>
+
+</head>
+
+<body>
+
+	<div data-role="page" id="home">
+		<div data-role="header">
+			<h1>豆瓣電影 Top 20</h1>
+		</div>
+		<div data-role="main">
+			<div data-role="main" class="ui-content">
+				<ol data-role="listview" id="mvlist" data-count-theme="b" data-filter="true">
+
+				</ol>
+			</div>
+
+		</div>
+		<!-- home -->
+
+
+
+
+
+
+
+</body>
+
+</html>
