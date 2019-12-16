@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+
+<body>
+
+    請輸入每日瀏覽量: <input type="text" id="pageview"><br>
+    <button type="button" onclick="amount_count()">計算我的收益</button>
+    
+    您的預估收益為：<span id="min_amount"></span><span id="till"></span><span id="max_amount"></span>
+
+</body>
+<script>
+        function amount_count(){
+            var pageview = document.getElementById("pageview").value;
+            var min_pageview = pageview / 1000;
+            var max_pagevies = pageview / 100;
+            document.getElementById('min_amount').innerHTML = min_pageview;
+            document.getElementById('till').innerHTML = "~";
+            document.getElementById('max_amount').innerHTML = max_pagevies;
+
+        }
+    </script>
+</html>
+
